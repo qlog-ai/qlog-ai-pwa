@@ -32,7 +32,7 @@
             <p class="text-base leading-7 text-gray-600">{question.answer}</p>
           </dd>
           <div class="lg:col-span-2 flex justify-end items-center space-x-2">
-            <button class="rounded-md bg-amber-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">Update</button>
+            <button on:click={() => goto(`/dataset/${question.id}`)} class="rounded-md bg-amber-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">Update</button>
             <button on:click={() => deleteQuestion(question.id)} class="rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Delete</button>
           </div>
         </div>  
