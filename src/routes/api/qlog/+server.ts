@@ -3,6 +3,7 @@ import mysql from '$lib/server/db/mysql';
 import { questions } from '$lib/server/schema/questions';
 import { eq, desc } from 'drizzle-orm';
 import { getVerifiedUserAddress } from '$lib/route_utils';
+
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ request, cookies }) {
 	let verified_wallet_address = await getVerifiedUserAddress({ request, cookies });
