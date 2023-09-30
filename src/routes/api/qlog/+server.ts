@@ -47,7 +47,7 @@ export async function DELETE({ request, cookies }) {
 
 	const { id } = await request.json();
 	const old_question = await mysql.select().from(questions).where(eq(questions.id, id));
-	if (old_question.wallet_address !== verified_wallet_address) {
+	if (!!old_question.length && old_question[0].wallet_address !== verified_wallet_address) {
 		throw error(401, { message: 'Unauthorized' });
 	}
 
