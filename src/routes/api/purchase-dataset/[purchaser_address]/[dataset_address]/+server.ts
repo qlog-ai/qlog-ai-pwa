@@ -5,17 +5,16 @@ import { eq, desc } from 'drizzle-orm';
 import { getVerifiedUserAddress } from '$lib/route_utils';
 import { BEARER_TOKEN } from '$env/static/private';
 
-export async function POST({ request, cookies }) {
+export async function GET({ request, params }) {
 	// Bearer token check
-	const bearer_token = request.headers.get('Authorization')?.split(' ')[1];
-
+	const bearer_token = request.headers.get('authorization')?.split(' ')[1];
 	if (bearer_token === BEARER_TOKEN) {
-		const { purchaseWalletAddress, datasetAddress } = await request.json();
-		// some magic
+		// Encrypt dataset with public key and push to IPFS?
 
 		return json({
 			questions: 22
 		});
+	} else {
+		throw error(401, { message: 'Unauthorized'})
 	}
-	return new Response(String('purchased'));
 }
