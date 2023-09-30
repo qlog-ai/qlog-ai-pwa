@@ -64,6 +64,14 @@ export async function POST({ request, cookies }) {
 	const { context, question, answer, input } = await request.json();
 	await mysql
 		.insert(questions)
-		.values({ wallet_address: verified_wallet_address, context, question, answer, input, created_at: now, updated_at: now });
+		.values({
+			wallet_address: verified_wallet_address,
+			context,
+			question,
+			answer,
+			input,
+			created_at: now,
+			updated_at: now
+		});
 	return new Response(String('inserted'));
 }

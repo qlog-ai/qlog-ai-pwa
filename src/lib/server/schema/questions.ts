@@ -5,7 +5,7 @@ export const questions = mysqlTable(
 	{
 		id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
 		wallet_address: varchar('wallet_address', { length: 42 }),
-        context: text('context'),
+		context: text('context'),
 		question: text('question'),
 		answer: text('answer'),
 		input: text('input'),
