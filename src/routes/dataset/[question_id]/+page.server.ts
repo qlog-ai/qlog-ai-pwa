@@ -1,5 +1,5 @@
 import { getVerifiedUserAddress } from '$lib/route_utils';
-import mysql from '$lib/server/db/mysql.js';
+import mysql from '$lib/server/db/mysql';
 import { questions } from '$lib/server/schema/questions';
 import { error } from '@sveltejs/kit';
 import { eq, desc } from 'drizzle-orm';
