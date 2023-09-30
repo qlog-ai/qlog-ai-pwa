@@ -1,0 +1,83 @@
+{
+	"version": "5",
+	"dialect": "mysql",
+	"id": "0e5742a0-a005-425d-8e85-fe371fb34798",
+	"prevId": "00000000-0000-0000-0000-000000000000",
+	"tables": {
+		"questions": {
+			"name": "questions",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"wallet_address": {
+					"name": "wallet_address",
+					"type": "varchar(42)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"question": {
+					"name": "question",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"answer": {
+					"name": "answer",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"input": {
+					"name": "input",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "datetime",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "datetime",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				}
+			},
+			"indexes": {
+				"wallet_address_idx": {
+					"name": "wallet_address_idx",
+					"columns": ["wallet_address"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {
+				"questions_id": {
+					"name": "questions_id",
+					"columns": ["id"]
+				}
+			},
+			"uniqueConstraints": {}
+		}
+	},
+	"schemas": {},
+	"_meta": {
+		"schemas": {},
+		"tables": {},
+		"columns": {}
+	}
+}
