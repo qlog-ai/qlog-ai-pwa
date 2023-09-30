@@ -21,6 +21,7 @@ export async function GET({ request, cookies, url }) {
 						.where(eq(questions.wallet_address, verified_wallet_address))
 						.orderBy(desc(questions.updated_at))
 				).map((q) => {
+					// TODO: use switch statement and add LLAMA2 and other formats
 					return url.searchParams.get('legacy') !== 'true'
 						? {
 								messages: [
