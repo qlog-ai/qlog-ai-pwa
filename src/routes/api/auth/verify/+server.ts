@@ -1,24 +1,13 @@
 import { error, json } from '@sveltejs/kit';
-import { verifyMessage } from 'ethers';
+import { getVerifiedUserAddress } from '$lib/route_utils';
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ request, cookies }) {
-	const cookie = cookies.get('verifier-cookie');
-
-	if (!cookie) {
-		throw error(401, { message: 'Unauthorized' });
-	}
-	const { signed, address, datetimenow, datetimefutureweek } = JSON.parse(cookie);
-
-	const addr = verifyMessage(
-		`You are logging in to QLog.ai at UTC time: ${datetimenow}. \n\nThis session is valid until UTC time: ${datetimefutureweek}`,
-		signed
-	);
-
-	if (new Date().getTime() < Date.parse(datetimefutureweek) && addr === address) {
+	const verifiedAddress = await getVerifiedUserAddress({ request, cookies });
+	if (verifiedAddress) {
 		return json({
 			authenticated: true,
-			address: addr
+			address: verifiedAddress
 		});
 	} else {
 		throw error(401, { message: 'Unauthorized' });
