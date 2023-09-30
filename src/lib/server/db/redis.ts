@@ -1,4 +1,4 @@
-import { Redis } from '@upstash/redis'
+import { Redis } from '@upstash/redis/cloudflare'
 import { UPSTASH_API_URL, UPSTASH_API_KEY } from '$env/static/private';
 
 const redis = new Redis({

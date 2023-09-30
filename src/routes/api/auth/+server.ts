@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import redis from '$lib/db/redis';
+import redis from '$lib/server/db/redis';
 
 /** @type {import('./$types').RequestHandler} */
 export function GET({ url }) {
