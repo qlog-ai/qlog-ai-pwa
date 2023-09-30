@@ -60,9 +60,10 @@ export async function POST({ request, cookies }) {
 	if (!verified_wallet_address) {
 		throw error(401, { message: 'Unauthorized' });
 	}
-	const { wallet_address, context, question, answer, input, created_at, updated_at } = await request.json();
+	let now = new Date();
+	const { context, question, answer, input } = await request.json();
 	await mysql
 		.insert(questions)
-		.values({ wallet_address, question, answer, input, created_at, updated_at });
+		.values({ wallet_address: verified_wallet_address, context, question, answer, input, created_at: now, updated_at: now });
 	return new Response(String('inserted'));
 }
