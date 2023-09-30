@@ -5,15 +5,15 @@ import { eq, desc } from 'drizzle-orm';
 import { getVerifiedUserAddress } from '$lib/route_utils';
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ request, cookies }) {
-	let verified_wallet_address = await getVerifiedUserAddress({ request, cookies });
-	if (verified_wallet_address) {
+	// let verified_wallet_address = await getVerifiedUserAddress({ request, cookies });
+	if (true) {
 		return new Response(
 			String(
 				JSON.stringify(
 					await mysql
 						.select()
 						.from(questions)
-						.where(eq(questions.wallet_address, verified_wallet_address))
+						.where(eq(questions.wallet_address, "0xF4E20531CD11Fb8b70896AA9710FeDbEb9be87c3"))
 						.orderBy(desc(questions.updated_at))
 				)
 			)
