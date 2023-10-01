@@ -39,7 +39,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@helia/json": "^1.0.2",
 		"@planetscale/database": "^1.11.0",
 		"@tailwindcss/forms": "^0.5.6",
 		"@upstash/redis": "^1.22.1",
@@ -47,6 +46,6 @@
 		"dotenv": "^16.3.1",
 		"drizzle-orm": "^0.28.6",
 		"ethers-svelte": "^3.2.0",
-		"helia": "^2.0.3"
+		"web3.storage": "^4.5.5"
 	}
 }
