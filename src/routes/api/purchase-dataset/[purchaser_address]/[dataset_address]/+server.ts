@@ -4,6 +4,7 @@ import { questions } from '$lib/server/schema/questions';
 import { eq, desc } from 'drizzle-orm';
 import { BEARER_TOKEN, WEB3_STORAGE_API_TOKEN } from '$env/static/private';
 import { Web3Storage } from 'web3.storage';
+import redis from '$lib/server/db/redis';
 
 const web3storage = new Web3Storage({ token: WEB3_STORAGE_API_TOKEN })
 
@@ -21,6 +22,7 @@ export async function GET({ request, params }) {
 		)
 
         const cid = await web3storage.put([new File([dataset], `${purchaser_address}-${dataset_address}.json`, { type: 'application/JSON' })])        
+		await redis.zadd(purchaser_address, { score: new Date().getTime(), member: cid });
 
 		return json({
 			cid: cid
