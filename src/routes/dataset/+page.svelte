@@ -3,6 +3,24 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	/** @type {import('./$types').PageData} */
 	export let data;
+
+	async function downloadObjectAsJson(){
+		const resp = await fetch('/api/qlog/export', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		});
+		const chatGPT_data = await resp.json();
+		var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(chatGPT_data));
+		var downloadAnchorNode = document.createElement('a');
+		downloadAnchorNode.setAttribute("href",     dataStr);
+		downloadAnchorNode.setAttribute("download", "your-dataset" + ".json");
+		document.body.appendChild(downloadAnchorNode); // required for firefox
+		downloadAnchorNode.click();
+		downloadAnchorNode.remove();
+	}
+
 	async function deleteQuestion(id: number) {
 		const resp = await fetch('/api/qlog', {
 			method: 'DELETE',
@@ -24,11 +42,17 @@
 	>
 		<div class="flex justify-between items-center w-full">
 			<h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">Your Dataset</h2>
-			<a
-				href="/dataset/add"
-				class="rounded-md bg-green-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-				>Add question</a
-			>
+			<div class="flex items-center justify-center space-x-4">
+
+				<button on:click={downloadObjectAsJson} class="rounded-md bg-green-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" >
+					Download Dataset
+				</button>
+				<a
+					href="/dataset/add"
+					class="rounded-md bg-green-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+					>+ Add question</a
+				>
+			</div>
 		</div>
 		{#each data.questions as question}
 			<dl class="mt-4 space-y-4 divide-y divide-gray-900/10">
