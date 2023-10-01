@@ -1,3 +1,22 @@
+<script>
+	import { defaultEvmStores as evm, contracts, signerAddress } from 'ethers-svelte';
+	import { parseEther, encodeBytes32String } from 'ethers';
+	import { onMount } from 'svelte';
+	import { chainlink } from '$lib/abi/chainlink';
+
+	onMount(async () => {
+		evm.setProvider();
+		evm.attachContract('chainlink', "0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846", chainlink);
+	});
+</script>
+
+<button
+on:click={async () => {
+	await $contracts.chainlink.approve("0x88b9BB23d84C4F5Ebbb2E257e8C7882Af60Ea281", parseEther('100.0'));
+}}
+class="mt-4 w-full rounded-md bg-orange-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+>Set your LINK allowance before you can buy a dataset</button
+>
 <ul role="list" class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 	{#each [1, 2, 3, 4, 5, 6] as item}
 		<li
